@@ -1,4 +1,3 @@
-#rescue_From ActiveRecord::RecordNotDestroyed, with: :not_destroyed
 module Api
   module V1
     class BooksController < ApplicationController
@@ -32,10 +31,6 @@ module Api
         def book_params
           params.require(:book).permit(:title, :author)
         end
-
-        # def not_destroyed
-        #   render json: {}, status: :unprocessable_entity
-        # end
     end
   end
 end
