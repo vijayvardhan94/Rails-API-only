@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def index
-    render json: Book.all
+    render json: Book.all, status: :ok
   end
 
   def create
