@@ -18,8 +18,10 @@ class BooksController < ApplicationController
   def destroy
 
     Book.find(params[:id]).destroy!
-
+    #to deal with exception use the destroy with a bang.
     head :no_content
+  rescue ActiveRecord::RecordNotDestroyed
+    render json: {}, status: :unprocessable_entity
 
   end
 
