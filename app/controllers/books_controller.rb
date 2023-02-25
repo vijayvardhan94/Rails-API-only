@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+rescue_From ActiveRecord::RecordNotDestroyed, with: :not_destroyed
   def index
     render json: Book.all, status: :ok
   end
@@ -20,8 +21,6 @@ class BooksController < ApplicationController
     Book.find(params[:id]).destroy!
     #to deal with exception use the destroy with a bang.
     head :no_content
-  rescue ActiveRecord::RecordNotDestroyed
-    render json: {}, status: :unprocessable_entity
 
   end
 
@@ -29,6 +28,10 @@ class BooksController < ApplicationController
 
     def book_params
       params.require(:book).permit(:title, :author)
+    end
+
+    def not_destroyed
+      render json: {}, status: :unprocessable_entity
     end
 end
    
