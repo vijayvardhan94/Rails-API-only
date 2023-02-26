@@ -18,6 +18,13 @@ module Api
         end
       end
 
+      def show
+        book = Book.find(params[:id])
+        render json: book
+      rescue ActiveRecord::RecordNotFound
+        render json: { error: "Book doesnt exist with this Id" }, status: :not_found
+      end
+
       def destroy
 
         Book.find(params[:id]).destroy!
