@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  #get 'books/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
-  resources :books, only: [:index, :create, :destroy]
+  get 'bookstore/index'
+  namespace :api do
+    namespace :v1 do
+      resources :books, only: [:index, :create, :destroy, :show]
+    end
+    namespace :v2 do
+      resources :stores, only: [:index, :create, :destroy, :show]
+    end
+  end
   
 end
